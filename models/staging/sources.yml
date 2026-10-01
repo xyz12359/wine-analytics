@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: wine_raw
+    database: wine-analytics-508220
+    schema: wine_raw
+    tables:
+      - name: wine_reviews_raw
+        description: "WineEnthusiast'tan toplanan ham şarap değerlendirmeleri (Haziran 2017)"

@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: dim_country
+    description: "Ülke ve eyalet boyutu"
+    columns:
+      - name: country_id
+        description: "Birincil anahtar"
+        tests:
+          - unique
+          - not_null
+      - name: country
+        tests:
+          - not_null
+
+  - name: dim_variety
+    description: "Üzüm çeşidi boyutu"
+    columns:
+      - name: variety_id
+        description: "Birincil anahtar"
+        tests:
+          - unique
+          - not_null
+      - name: variety
+        tests:
+          - not_null
+
+  - name: fct_wine_review
+    description: "Şarap değerlendirmeleri olgu tablosu"
+    columns:
+      - name: review_id
+        description: "Birincil anahtar"
+        tests:
+          - unique
+          - not_null
+      - name: country_id
+        description: "dim_country'ye yabancı anahtar"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_country')
+                field: country_id
+      - name: variety_id
+        description: "dim_variety'ye yabancı anahtar"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_variety')
+                field: variety_id
+      - name: points
+        description: "100 üzerinden puan (veride 80-100 arası)"
+        tests:
+          - not_null
